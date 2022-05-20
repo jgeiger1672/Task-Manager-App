@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment4.MainPage"
+             Title="Title"
+             NavigationPage.HasNavigationBar="True">
+
+    <StackLayout>
+        <Label Text="Tasks" FontSize="Large" FontAttributes="Bold" Padding="5"/>
+        <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedItem}" ItemSelected="OnTaskSelected" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Invoked="DeleteTaskSwipeItem_Selected"/>
+                                </SwipeView.LeftItems>
+                                <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsCompleted}"/>
+                                
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Description}"/>
+                                    <Label Text="{Binding Deadline}"/>
+                                    <Label Text="{Binding Priority}"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                            </SwipeView>
+                            
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Text="Appointments" FontSize="Large" FontAttributes="Bold" Padding="5"/>
+        <ListView x:Name="appointmentListView" ItemsSource="{Binding AppointmentList}" SelectedItem="{Binding SelectedItem}" ItemSelected="OnAppointmentSelected" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Invoked="DeleteAppointmentSwipeItem_Selected"/>
+                                </SwipeView.LeftItems>
+                                <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsCompleted}"/>
+                                
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Description}"/>
+                                    <Label Text="{Binding Start}"/>
+                                    <Label Text="{Binding Stop}"/>
+                                    <Label Text="{Binding Attendees}"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                            </SwipeView>
+                            
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Add New Task" Clicked="CreateTask_Clicked" Grid.Row="0" Grid.Column="0" BackgroundColor="LightGray"/>
+            <Button Text="Add New Appointment" Clicked="CreateAppointment_Clicked" Grid.Row="1" Grid.Column="0" BackgroundColor="LightGray"/>
+            
+            
+            <Button Text="Save" Clicked="Save_Clicked" Grid.Row="0" Grid.Column="1" BackgroundColor="LightGray"/>
+            <Button Text="Load" Clicked="Load_Clicked" Grid.Row="1" Grid.Column="1" BackgroundColor="LightGray"/>
+            <Button Text="Sort By Priority" Clicked="Sort_Clicked" Grid.Row="2" Grid.Column="0" BackgroundColor="LightGray"/>
+            <Button Text="Reset Search/Sort" Clicked="ResetSearch_Clicked" Grid.Row="2" Grid.Column="1" BackgroundColor="LightGray"/>
+            
+        </Grid>
+        <SearchBar x:Name="MainSearchBar" SearchButtonPressed="OnSearchButtonPressed" Grid.Row="3"/>
+        
+    </StackLayout>
+
+</ContentPage>
